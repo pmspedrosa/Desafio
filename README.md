@@ -59,3 +59,14 @@ Controller -> Service -> Repository -> Model
 ### Testes
 * Postman (testar os endpoints) manualmente
 * JUnit
+
+
+## Tecnologias utilizadas Frontend
+* HTML
+* CSS
+* JavaScript
+
+### Notas de desenvolvimento
+* index.html -> página principal
+* style.css -> estilos
+* script.js -> lógica do frontend
