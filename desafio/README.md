@@ -59,9 +59,3 @@ Controller -> Service -> Repository -> Model
 ### Testes
 * Postman (testar os endpoints) manualmente
 * JUnit
-
-
-
-
-
-    
