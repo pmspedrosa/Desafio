@@ -5,6 +5,7 @@ Serviço para realizar a gestão de candidatos para a entrada numa empresa.
 ## Indice
 
 - [Introdução](#introdução)
+- [Divisão do projeto](#divisão-do-projeto)
 - [Base de dados](#base-de-dados)
 - [Backend](#backend)
   - [Estrutura do projeto](#estrutura-do-projeto)
@@ -23,6 +24,18 @@ O desafio consiste em criar um serviço para realizar a gestão de candidatos pa
 Para tal, é necessário criar um Web Service e um Client.
 Foram utilizadas as tecnologias Java, Spring Boot, MySQL, HTML, CSS e JavaScript.
 Postman e JUnit foram utilizados para testar o serviço.
+
+## Divisão do projeto
+
+- Backend -> pasta desafio
+- Frontend -> pasta desafio-frontend
+
+Outros elementos:
+
+- .env.example -> exemplo de variáveis de ambiente
+- ResumoDesafio.md -> resumo do desafio
+- README.md -> documentação do projeto
+- Postman collection -> desafio/Desafio.postman_collection.json
 
 ## Base de dados
 
