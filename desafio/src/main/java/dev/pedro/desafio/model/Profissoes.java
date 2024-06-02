@@ -1,9 +1,6 @@
 package dev.pedro.desafio.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Profissoes {
@@ -11,6 +8,7 @@ public class Profissoes {
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long id;
         private String descricao;
+
 
         public Profissoes() {}
 

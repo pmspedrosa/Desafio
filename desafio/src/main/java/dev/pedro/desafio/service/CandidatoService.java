@@ -45,39 +45,19 @@ public class CandidatoService implements CandidatoInterface {
     }
 
     @Override
-    public Candidato updateCandidato(Long id, Candidato candidato) {
-        validateCandidato(candidato);
+    public Candidato updateCandidato(Long id, Candidato candidatoUpdated) {
+        validateCandidato(candidatoUpdated);
         try {
             Optional<Candidato> checkCandidate = candidatosRepository.findById(id);
             if (checkCandidate.isEmpty()) {
                 throw new RuntimeException("Candidato não encontrado");
             }
 
-            //Verificar que partes do candidato foram atualizadas para atualizar apenas essas partes
-            Candidato candidateToUpdate = checkCandidate.get();
+            Candidato candidatoToUpdate = checkCandidate.get();
 
-            //Se o nome do candidato foi atualizado, diferente de null e diferente do nome atual
-            if (candidato.getNome() != null && !candidato.getNome().equals(candidateToUpdate.getNome())) {
-                candidateToUpdate.setNome(candidato.getNome());
-            }
-            //Se a idade do candidato foi atualizada, diferente de 0 e diferente da idade atual
-            if (candidato.getIdade() != 0 && candidato.getIdade() != candidateToUpdate.getIdade()) {
-                candidateToUpdate.setIdade(candidato.getIdade());
-            }
-            //Se o contacto do candidato foi atualizado, diferente de null e diferente do contacto atual
-            if (candidato.getContacto() != null && !candidato.getContacto().equals(candidateToUpdate.getContacto())) {
-                candidateToUpdate.setContacto(candidato.getContacto());
-            }
-            //Se a morada do candidato foi atualizada, diferente de null e diferente da morada atual
-            if (candidato.getMorada() != null && !candidato.getMorada().equals(candidateToUpdate.getMorada())) {
-                candidateToUpdate.setMorada(candidato.getMorada());
-            }
-            //Se a profissão do candidato foi atualizada, diferente de null e diferente da profissão atual
-            if (candidato.getProfissao() != null && !candidato.getProfissao().equals(candidateToUpdate.getProfissao())) {
-                candidateToUpdate.setProfissao(candidato.getProfissao());
-            }
+            candidatoToUpdate = updateCandidato(candidatoUpdated, candidatoToUpdate);
 
-            return candidatosRepository.save(candidateToUpdate);
+            return candidatosRepository.save(candidatoToUpdate);
         } catch (Exception e) {
             throw new RuntimeException("Ocorreu um erro ao tentar atualizar candidato", e);
         }
@@ -89,6 +69,15 @@ public class CandidatoService implements CandidatoInterface {
             candidatosRepository.deleteById(id);
         }catch (Exception e) {
             throw new RuntimeException("Ocorreu um erro ao tentar eliminar candidato", e);
+        }
+    }
+
+    @Override
+    public List<Candidato> getCandidatoByProfissaoId(String profissao_id) {
+        try {
+            return candidatosRepository.findByProfissaoId(profissao_id);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocorreu um erro ao tentar encontrar candidatos", e);
         }
     }
 
@@ -110,4 +99,32 @@ public class CandidatoService implements CandidatoInterface {
             throw new IllegalArgumentException("Profissão do candidato não pode ser null");
         }
     }
+
+    private Candidato updateCandidato(Candidato candidato, Candidato candidateToUpdate) {
+
+        //Se o nome do candidato foi atualizado, diferente de null e diferente do nome atual
+        if (!candidato.getNome().equals(candidateToUpdate.getNome())) {
+            candidateToUpdate.setNome(candidato.getNome());
+        }
+        //Se a idade do candidato foi atualizada, diferente de 0 e diferente da idade atual
+        if (candidato.getIdade() != candidateToUpdate.getIdade()) {
+            candidateToUpdate.setIdade(candidato.getIdade());
+        }
+        //Se o contacto do candidato foi atualizado, diferente de null e diferente do contacto atual
+        if (!candidato.getContacto().equals(candidateToUpdate.getContacto())) {
+            candidateToUpdate.setContacto(candidato.getContacto());
+        }
+        //Se a morada do candidato foi atualizada, diferente de null e diferente da morada atual
+        if (!candidato.getMorada().equals(candidateToUpdate.getMorada())) {
+            candidateToUpdate.setMorada(candidato.getMorada());
+        }
+        //Se a profissão do candidato foi atualizada, diferente de null e diferente da profissão atual
+        if (!candidato.getProfissao().equals(candidateToUpdate.getProfissao())) {
+            candidateToUpdate.setProfissao(candidato.getProfissao());
+        }
+
+        return candidateToUpdate;
+    }
+
+
 }

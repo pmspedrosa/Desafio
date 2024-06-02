@@ -1,10 +1,6 @@
 package dev.pedro.desafio.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class Candidato {
@@ -17,6 +13,7 @@ public class Candidato {
     private String morada;
 
     @ManyToOne
+    @JoinColumn(name = "profissao_id")
     private Profissoes profissao;
 
     public Candidato() {

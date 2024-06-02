@@ -25,11 +25,13 @@ public class CandidatosController {
         return "Hello, World!";
     }
 
+    //GET /candidatos - Retorna todos os candidatos
     @GetMapping("")
     public ResponseEntity<List<Candidato>> getCandidatos() {
         return ResponseEntity.ok(candidatoInterface.getAllCandidatos());
     }
 
+    //POST /candidatos - Cria um ou mais candidatos
     @PostMapping("")
     public ResponseEntity<?> createCandidatos(@RequestBody List<Candidato> candidates) {
         try {
@@ -44,6 +46,7 @@ public class CandidatosController {
         }
     }
 
+    //GET /candidatos/{id} - Retorna um candidato específico
     @GetMapping("/{id}")
     public ResponseEntity<Candidato> getCandidato(@PathVariable Long id) {
         return candidatoInterface.getCandidatoById(id)
@@ -51,6 +54,7 @@ public class CandidatosController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    //PUT /candidatos/{id} - Atualiza um candidato específico
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCandidato(@PathVariable Long id, @RequestBody Candidato candidato) {
         try {
@@ -64,6 +68,7 @@ public class CandidatosController {
         }
     }
 
+    //DELETE /candidatos/{id} - Elimina um candidato específico
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCandidato(@PathVariable Long id) {
         try {
@@ -73,6 +78,16 @@ public class CandidatosController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro ao tentar eliminar candidato");
+        }
+    }
+
+    //GET /candidatos/profissao/{profissao_id} - Retorna todos os candidatos com uma profissão específica
+    @GetMapping("/profissao/{profissao_id}")
+    public ResponseEntity<?> searchByProfissao(@PathVariable String profissao_id) {
+        try {
+            return ResponseEntity.ok(candidatoInterface.getCandidatoByProfissaoId(profissao_id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro ao tentar encontrar candidatos");
         }
     }
 

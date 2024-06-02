@@ -10,4 +10,5 @@ public interface CandidatoInterface {
     Candidato createCandidato(Candidato candidato);
     Candidato updateCandidato(Long id, Candidato candidato);
     void deleteCandidato(Long id);
+    List<Candidato> getCandidatoByProfissaoId(String profissao_id);
 }

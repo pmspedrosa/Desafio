@@ -16,6 +16,7 @@ public class ProfissoesController {
     @Autowired
     private ProfissoesInterface profissoesInterface;
 
+    //GET /profissoes - Retorna todas as profissões
     @GetMapping("")
     public ResponseEntity<List<Profissoes>> getProfissoes() {
         return ResponseEntity.ok(profissoesInterface.getAllProfissoes());
