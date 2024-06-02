@@ -22,6 +22,7 @@ Serviço para realizar a gestão de candidatos para a entrada numa empresa.
 O desafio consiste em criar um serviço para realizar a gestão de candidatos para a entrada numa empresa.
 Para tal, é necessário criar um Web Service e um Client.
 Foram utilizadas as tecnologias Java, Spring Boot, MySQL, HTML, CSS e JavaScript.
+Postman e JUnit foram utilizados para testar o serviço.
 
 ## Base de dados
 
