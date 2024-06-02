@@ -1,72 +1,131 @@
 # Desafio
 
-## Web Service
+Serviço para realizar a gestão de candidatos para a entrada numa empresa.
 
-### Responsável pela gestão e persistência dos dados:
-* Criar candidato (um ou vários) - (POST /candidatos) - Recebe lista de candidatos
-* Editar candidato - (PUT /candidatos/{id})
-* Eliminar candidato - (DELETE /candidatos/{id})
-* Obter dados de todas os candidatos - (GET /candidatos)
-* Obter dados de um candidato - (GET /candidatos/{id})
+## Indice
 
-### Tabela Candidatos:
-* ID (gerado automaticamente)
-* NOME 
-* CONTACTO 
-* IDADE 
-* MORADA 
-* PROFISSAO (deverá estar relacionado com a tabela Profissao)
+- [Introdução](#introdução)
+- [Base de dados](#base-de-dados)
+- [Backend](#backend)
+  - [Estrutura do projeto](#estrutura-do-projeto)
+  - [Endpoints](#endpoints)
+  - [Notas de desenvolvimento backend](#notas-de-desenvolvimento-backend)
+  - [Utilização](#utilização)
+- [Frontend](#frontend)
+  - [Notas de desenvolvimento frontend](#notas-de-desenvolvimento-frontend)
+  - [Utilização](#utilização)
+- [Testes](#testes)
+  - [Ferramentas utilizadas](#ferramentas-utilizadas)
 
-### Tabela Profissao:
-* ID
-* DESCRICAO (inserir os seguintes dados: Estudante, Desempregado, Trabalhador por conta de outrem, 
-Trabalhador por conta própria, Outro)
+## Introdução
 
-### Notas:
-* criar serviço -> Java (Spring Boot)
-* a persistência dos dados pode ser realizada com uma BD á tua escolha
+O desafio consiste em criar um serviço para realizar a gestão de candidatos para a entrada numa empresa.
+Para tal, é necessário criar um Web Service e um Client.
+Foram utilizadas as tecnologias Java, Spring Boot, MySQL, HTML, CSS e JavaScript.
 
+## Base de dados
 
-## Client
+Foram criadas duas tabelas: Candidatos e Profissões.
 
+### Tabela Candidatos
 
-### O Client é responsável pelo utilizador poder realizar todas as operações com as pessoas:
+```sql
+ID (gerado automaticamente)
+NOME
+CONTACTO
+IDADE
+MORADA
+PROFISSAO
+```
 
-### Criar Website apenas com uma página, sem autenticação, com as seguintes features:
-* formulário para adicionar candidato (A profissão a escolher deverá estar numa dropdown)
-* botão para adicionar candidato
-* tabela com todos os candidatos e dados
-* no final de cada linha da tabela deverá ter um botão para eliminar o candidato
-* no final de cada linha da tabela deverá ter um botão para editar o candidato (abre popup com formulário pré-preenchido com os dados atuais, e botão save)
+Nota: A coluna PROFISSAO tem uma relação muitos para um com a tabela Profissões.
 
+### Tabela Profissões
 
+```sql
+ID
+DESCRICAO 
+```
 
-## Tecnologias utilizadas Backend
-* Java
-* Spring Boot
-* MySQL
+Nota: Na run do projeto, a tabela Profissões é preenchida automaticamente, se ainda não estiver preenchida, com os seguintes dados: Estudante, Desempregado, Trabalhador por conta de outrem, Trabalhador por conta própria, Outro.
 
-### Notas de desenvolvimento
-* application.properties -> propriedades da base de dados (MySQL)
-* pom.xml -> dependências do projeto
-* @Autowire - injeção de dependências 
-* @RestControler - indica que é um controlador REST
-* .env -> variáveis de ambiente para acesso à base de dados
+## Backend
 
-### Fluxo de desenvolvimento
+O backend foi desenvolvido em Java com Spring Boot, utilizando uma base de dados MySQL.
+
+### Estrutura do projeto
+
+- Controller -> endpoints
+- Service -> regras de negócio
+- Repository -> acesso à base de dados
+- Model -> entidades
+
+Fluxo de desenvolvimento
+
+```bash
 Controller -> Service -> Repository -> Model
+```
 
-### Testes
-* Postman (testar os endpoints) manualmente
-* JUnit
+### Endpoints
 
+- GET /candidatos - obter todos os candidatos
+- GET /candidatos/{id} - obter um candidato
+- POST /candidatos - criar um candidato
+- PUT /candidatos/{id} - editar um candidato
+- DELETE /candidatos/{id} - eliminar um candidato
+- GET /candidatos/profissoes/{profissoes_id} - obter todos os candidatos com uma determinada profissão (este endpoint não foi implementado no frontend)
+- GET /profissoes - obter todas as profissões
 
-## Tecnologias utilizadas Frontend
-* HTML
-* CSS
-* JavaScript
+#### Notas de desenvolvimento backend
 
-### Notas de desenvolvimento
-* index.html -> página principal
-* style.css -> estilos
-* script.js -> lógica do frontend
+- application.properties -> inserção das propriedades da base de dados (MySQL)
+- .env -> variáveis de ambiente para acesso à base de dados
+- pom.xml -> dependências do projeto
+
+### Utilização
+
+1. Criar a base de dados no MySQL
+2. Definir as variáveis de ambiente no ficheiro .env com os dados relativos à bd (um ficheiro .env.example está disponível)
+
+```bash
+MYSQL_URL   = "<URL>"    ->    Exemplo:"localhost:3306"
+MYSQL_DATABASE = "<Nome BD>"
+MYSQL_USER  = "<User>"
+MYSQL_PASSWORD  = "<Password>"
+```
+
+3. Executar o projeto
+
+## Frontend
+
+O frontend foi desenvolvido em HTML, CSS e JavaScript.
+
+### Notas de desenvolvimento frontend
+
+- index.html -> página principal
+- style.css -> estilos
+- script.js -> lógica do frontend
+
+### Utilização
+
+- Abrir o ficheiro index.html no browser
+
+## Testes
+
+Foram apenas realizados testes unitários. No entanto, seria interessante realizar testes de integração e testes de aceitação visto que estes são mais abrangentes.
+
+### Ferramentas utilizadas
+
+- Postman (testar os endpoints) manualmente
+- JUnit - testes unitários
+
+### Utilização
+
+- Executar os testes unitários
+
+## Autor
+
+**Pedro Pedrosa**
+
+- [LinkedIn](https://www.linkedin.com/in/pedro-pedrosa-492537126/)
+- [GitHub](https://github.com/pmspedrosa)
